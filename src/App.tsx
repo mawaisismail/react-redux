@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ActionName,
+  addNumber,
+  IInitialState,
+  minusNumber,
+  resetAll,
+} from "./utills/redux/action";
 
 function App() {
+  const { ADD_ONE } = ActionName;
+  const dispatch = useDispatch();
+  const { number } = useSelector((value: IInitialState) => value);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <p>{number ? number : "0"}</p>
+        <button onClick={() => dispatch(addNumber(10))}>ADD 10</button>
+        <button onClick={() => dispatch(minusNumber(10))}>Minus 10</button>
+        <button onClick={() => dispatch(resetAll())}>Reset ALL</button>
+      </div>
     </div>
   );
 }
