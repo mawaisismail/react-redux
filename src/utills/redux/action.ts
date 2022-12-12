@@ -2,6 +2,7 @@ export enum ActionName {
   ADD_ONE = "ADD_ONE",
   MINUS_ONE = "MINUS_ONE",
   DELETE_ALL = "DELETE_ALL",
+  CHANGE_AGE = "CHANGE_AGE",
 }
 
 export interface IActionType {
@@ -11,11 +12,10 @@ export interface IActionType {
 
 export interface IInitialState {
   number: number;
-}
-
-interface IAddNumber {
-  action: ActionName.ADD_ONE;
-  payload: number;
+  baseUser: {
+    name: string;
+    age: number;
+  };
 }
 
 export const addNumber = (value: number): IActionType => {
@@ -35,5 +35,11 @@ export const resetAll = (): IActionType => {
   return {
     payload: 0,
     type: ActionName.DELETE_ALL,
+  };
+};
+export const changeAge = (age: number): IActionType => {
+  return {
+    payload: age,
+    type: ActionName.CHANGE_AGE,
   };
 };
